@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Instalasi CCTV</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:linear-gradient(135deg,#0f172a,#1e3a8a);
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.container{
+    width:500px;
+    background:white;
+    padding:40px;
+    border-radius:20px;
+    box-shadow:0 10px 30px rgba(0,0,0,.3);
+}
+
+h1{
+    text-align:center;
+    color:#1e3a8a;
+    margin-bottom:10px;
+}
+
+.subtitle{
+    text-align:center;
+    color:gray;
+    margin-bottom:20px;
+}
+
+.info-box{
+    background:#dbeafe;
+    padding:12px;
+    border-radius:10px;
+    margin-bottom:15px;
+    color:#1e40af;
+    font-size:14px;
+}
+
+input,
+textarea,
+select{
+    width:100%;
+    padding:14px;
+    margin:10px 0;
+    border:1px solid #ddd;
+    border-radius:10px;
+}
+
+button{
+    width:100%;
+    padding:14px;
+    background:#2563eb;
+    color:white;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:16px;
+    font-weight:bold;
+}
+
+button:hover{
+    background:#1d4ed8;
+}
+
+.back-btn{
+    display:block;
+    text-align:center;
+    margin-top:15px;
+    text-decoration:none;
+    color:#1e3a8a;
+    font-weight:bold;
+}
+
+.preview{
+    width:100%;
+    max-height:250px;
+    object-fit:contain;
+    margin-top:10px;
+    display:none;
+    border-radius:10px;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+    <h1>Instalasi CCTV</h1>
+
+    <p class="subtitle">
+        Isi data berikut untuk pemasangan CCTV
+    </p>
+
+    <div class="info-box">
+        Setelah mengisi formulir dan mengunggah bukti pembayaran,
+        pesanan akan masuk ke dashboard admin.
+    </div>
+
+    <div class="info-box">
+        <b>Transfer Pembayaran:</b><br>
+        Bank BSI : 7299112588<br>
+        a.n. Muhammad Al Fayyadh
+    </div>
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <input
+            type="text"
+            name="nama"
+            placeholder="Nama Lengkap"
+            required
+        >
+
+        <textarea
+            name="alamat"
+            placeholder="Alamat Pemasangan CCTV"
+            required
+        ></textarea>
+
+        <input
+            type="text"
+            name="no_hp"
+            placeholder="Nomor WhatsApp"
+            required
+        >
+
+        <select name="paket" required>
+            <option value="">Pilih Paket CCTV</option>
+            <option value="2 Kamera">
+                2 Kamera - Rp1.500.000
+            </option>
+            <option value="4 Kamera">
+                4 Kamera - Rp2.500.000
+            </option>
+            <option value="8 Kamera">
+                8 Kamera - Rp4.500.000
+            </option>
+        </select>
+
+        <label>
+            <b>Upload Bukti Pembayaran</b>
+        </label>
+
+        <input
+            type="file"
+            name="bukti_pembayaran"
+            id="bukti"
+            accept="image/*"
+            required
+        >
+
+        <img id="preview" class="preview">
+
+        <button type="submit">
+            Pesan Sekarang
+        </button>
+
+    </form>
+
+    <a href="/" class="back-btn">
+        Kembali ke Home
+    </a>
+
+</div>
+
+<script>
+const bukti = document.getElementById('bukti');
+const preview = document.getElementById('preview');
+
+bukti.addEventListener('change', function(){
+
+    const file = this.files[0];
+
+    if(file){
+
+        const reader = new FileReader();
+
+        reader.onload = function(e){
+            preview.src = e.target.result;
+            preview.style.display = "block";
+        }
+
+        reader.readAsDataURL(file);
+    }
+});
+</script>
+
+</body>
+</html>

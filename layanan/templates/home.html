@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jasa Instalasi CCTV</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins', sans-serif;
+}
+
+body{
+    background:#f8fafc;
+    color:#1e293b;
+    animation: fadePage 1s ease;
+}
+
+/* PAGE ANIMATION */
+@keyframes fadePage{
+    from{opacity:0; transform:scale(0.98);}
+    to{opacity:1; transform:scale(1);}
+}
+
+/* NAVBAR */
+nav{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:20px 80px;
+    background:#0f172a;
+    color:white;
+}
+
+nav h2{
+    color:#38bdf8;
+    font-size:28px;
+}
+
+nav ul{
+    display:flex;
+    list-style:none;
+    gap:20px;
+}
+
+nav ul li a,
+nav ul li button{
+    text-decoration:none;
+    color:white;
+    background:none;
+    border:none;
+    cursor:pointer;
+    font-size:16px;
+    font-family:'Poppins', sans-serif;
+}
+
+nav ul li a:hover,
+nav ul li button:hover{
+    color:#38bdf8;
+}
+
+/* ABOUT */
+.about{
+    padding:80px;
+    background:white;
+}
+
+.about-container{
+    display:flex;
+    align-items:center;
+    gap:50px;
+    flex-wrap:wrap;
+}
+
+.about-image{
+    flex:1;
+}
+
+.about-image img{
+    width:100%;
+    border-radius:20px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.15);
+}
+
+.about-content{
+    flex:1;
+}
+
+.about-content h2{
+    color:#1e3a8a;
+    font-size:40px;
+    margin-bottom:20px;
+}
+
+.about-content p{
+    color:#475569;
+    line-height:1.8;
+    margin-bottom:15px;
+}
+
+.about-stats{
+    display:flex;
+    gap:20px;
+    margin-top:25px;
+    flex-wrap:wrap;
+}
+
+.stat-box{
+    background:#f1f5f9;
+    padding:20px;
+    border-radius:15px;
+    min-width:130px;
+    text-align:center;
+}
+
+.stat-box h3{
+    color:#2563eb;
+    font-size:28px;
+}
+
+/* HERO */
+.hero{
+    height:90vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    text-align:center;
+    background:
+    linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),
+    url('https://images.unsplash.com/photo-1558002038-1055907df827');
+    background-size:cover;
+    background-position:center;
+    color:white;
+}
+
+.hero h1{
+    font-size:55px;
+    margin-bottom:20px;
+}
+
+.hero p{
+    font-size:20px;
+    margin-bottom:30px;
+}
+
+.btn{
+    background:#38bdf8;
+    color:white;
+    padding:14px 30px;
+    text-decoration:none;
+    border-radius:30px;
+    font-weight:bold;
+    transition:0.3s;
+}
+
+.btn:hover{
+    transform:scale(1.1);
+    background:#0284c7;
+}
+
+/* SERVICES */
+.services{
+    padding:80px;
+    text-align:center;
+}
+
+.service-box{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+    margin-top:40px;
+}
+
+.card{
+    background:white;
+    padding:30px;
+    border-radius:20px;
+    box-shadow:0 5px 20px rgba(0,0,0,0.1);
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:translateY(-10px);
+}
+
+/* PAKET */
+.paket{
+    padding:80px;
+    background:#e2e8f0;
+    text-align:center;
+}
+
+.paket-box{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
+
+.price-card{
+    background:white;
+    padding:30px;
+    border-radius:20px;
+    box-shadow:0 5px 20px rgba(0,0,0,0.1);
+    transition:0.3s;
+}
+
+.price-card:hover{
+    transform:scale(1.05);
+}
+
+/* FOOTER */
+footer{
+    background:#0f172a;
+    color:white;
+    text-align:center;
+    padding:20px;
+}
+
+/* LOGOUT OVERLAY */
+#logout-overlay{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(15,23,42,0.95);
+    display:none;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    z-index:99999;
+    color:white;
+}
+
+/* SPINNER */
+.spinner{
+    width:60px;
+    height:60px;
+    border:6px solid #334155;
+    border-top:6px solid #38bdf8;
+    border-radius:50%;
+    animation: spin 1s linear infinite;
+    margin-bottom:15px;
+}
+
+@keyframes spin{
+    0%{transform:rotate(0deg);}
+    100%{transform:rotate(360deg);}
+}
+
+/* FADE OUT */
+.fade-out{
+    opacity:0;
+    transition:0.5s ease;
+}
+
+/* WHATSAPP FLOATING BUTTON */
+
+.whatsapp-float{
+
+    position:fixed;
+
+    right:25px;
+
+    bottom:25px;
+
+    width:60px;
+
+    height:60px;
+
+    background:#25d366;
+
+    color:white;
+
+    border-radius:50%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:30px;
+
+    text-decoration:none;
+
+    box-shadow:0 5px 20px rgba(0,0,0,.3);
+
+    z-index:9999;
+
+    transition:.3s;
+
+}
+
+
+.whatsapp-float:hover{
+
+    transform:scale(1.1);
+
+    background:#16a34a;
+
+    }
+
+.whatsapp-float i{
+    font-size:35px;
+}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+    .service-box,
+    .paket-box{
+        grid-template-columns:1fr;
+    }
+
+    nav{
+        flex-direction:column;
+        gap:10px;
+    }
+
+    .hero h1{
+        font-size:35px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- OVERLAY -->
+<div id="logout-overlay">
+    <div class="spinner"></div>
+    <p>Logging out...</p>
+</div>
+
+<!-- NAVBAR -->
+<nav>
+    <h2>Planet CCTV</h2>
+
+    <ul>
+
+        <li>
+            <a href="/about/">About</a>
+        </li>
+
+        <li>
+            <a href="/pesan/">Pesan</a>
+        </li>
+
+        <li>
+            <a href="/dashboard/">Riwayat</a>
+        </li>
+
+        <li>
+            <a href="/rating/">Rating</a>
+        </li>
+
+
+        {% if user.is_authenticated %}
+
+        <li>
+            <form method="post" action="/logout/" id="logoutForm">
+
+                {% csrf_token %}
+
+                <button type="button" onclick="logoutAnim()">
+                    Logout
+                </button>
+
+            </form>
+        </li>
+
+
+        <li style="color:#38bdf8;">
+            Hi, {{ user.username }}
+        </li>
+
+
+        {% else %}
+
+        <li>
+            <a href="/login/">Login</a>
+        </li>
+
+        {% endif %}
+
+    </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+    <h1 id="typing-text"></h1>
+    <p>Keamanan rumah, kantor, toko, dan sekolah dengan CCTV modern</p>
+    <a href="/pesan/" class="btn">Pesan Sekarang</a>
+</section>
+
+<!-- SERVICES -->
+<section class="services">
+    <h1>Layanan Kami</h1>
+
+    <div class="service-box">
+        <div class="card">
+            <h2>CCTV Rumah</h2>
+            <p>Pemasangan CCTV untuk keamanan rumah 24 jam</p>
+        </div>
+
+        <div class="card">
+            <h2>CCTV Kantor</h2>
+            <p>Monitoring kantor dan bisnis lebih aman</p>
+        </div>
+
+        <div class="card">
+            <h2>Maintenance CCTV</h2>
+            <p>Perbaikan kamera, DVR, dan troubleshooting sistem</p>
+        </div>
+    </div>
+</section>
+
+<!-- PAKET -->
+<section class="paket">
+    <h1>Paket CCTV</h1>
+
+    <div class="paket-box">
+        <div class="price-card">
+            <h2>2 Kamera</h2>
+            <p>Rp1.500.000</p>
+        </div>
+
+        <div class="price-card">
+            <h2>4 Kamera</h2>
+            <p>Rp3.000.000</p>
+        </div>
+
+        <div class="price-card">
+            <h2>8 Kamera</h2>
+            <p>Rp5.500.000</p>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <p>© 2026 Jasa Instalasi CCTV | Security Solution</p>
+</footer>
+
+<script>
+const textElement = document.getElementById("typing-text");
+const text = "Jasa Instalasi CCTV Profesional";
+
+let i = 0;
+function typing(){
+    if(i < text.length){
+        textElement.innerHTML += text.charAt(i);
+        i++;
+        setTimeout(typing, 80);
+    }
+}
+typing();
+
+/* LOGOUT ANIMATION (FIX 100%) */
+function logoutAnim(){
+    const overlay = document.getElementById("logout-overlay");
+    const form = document.getElementById("logoutForm");
+
+    overlay.style.display = "flex";
+    document.body.classList.add("fade-out");
+
+    setTimeout(function(){
+        form.submit();
+    }, 1200);
+}
+</script>
+
+<a 
+class="whatsapp-float"
+href="https://wa.me/6281262713159"
+target="_blank">
+
+<i class="fa-brands fa-whatsapp"></i>
+
+</a>
+
+</body>
+</html>

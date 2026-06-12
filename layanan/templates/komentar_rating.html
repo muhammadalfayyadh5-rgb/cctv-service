@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Komentar Rating - Planet CCTV</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+
+<style>
+
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+
+body{
+
+background:#f1f5f9;
+
+}
+
+
+/* NAVBAR */
+
+nav{
+
+height:90px;
+background:#0d172b;
+
+display:flex;
+align-items:center;
+justify-content:space-between;
+
+padding:0 80px;
+
+}
+
+
+.logo{
+
+color:#38bdf8;
+font-size:28px;
+font-weight:700;
+
+}
+
+
+.menu a{
+
+color:white;
+text-decoration:none;
+margin-left:25px;
+
+}
+
+
+.menu a:hover{
+
+color:#38bdf8;
+
+}
+
+
+
+/* CONTENT */
+
+
+.container{
+
+padding:50px;
+
+display:flex;
+
+justify-content:center;
+
+gap:30px;
+
+}
+
+
+
+.card{
+
+background:white;
+
+width:450px;
+
+padding:35px;
+
+border-radius:20px;
+
+box-shadow:0 10px 25px #0002;
+
+
+}
+
+
+
+h1{
+
+color:#0d172b;
+margin-bottom:20px;
+
+}
+
+
+
+label{
+
+font-weight:600;
+
+}
+
+
+
+
+input,
+textarea,
+select{
+
+
+width:100%;
+
+padding:12px;
+
+margin:10px 0 20px;
+
+border-radius:10px;
+
+border:1px solid #ddd;
+
+
+}
+
+
+
+textarea{
+
+height:120px;
+
+resize:none;
+
+}
+
+
+
+/* STAR */
+
+
+.stars{
+
+display:flex;
+
+gap:10px;
+
+margin:15px 0 25px;
+
+}
+
+
+.stars input{
+
+width:auto;
+
+}
+
+
+
+.star{
+
+font-size:40px;
+
+color:#ffc107;
+
+}
+
+
+
+/* BUTTON */
+
+
+button{
+
+width:100%;
+
+padding:14px;
+
+border:none;
+
+border-radius:30px;
+
+background:#38bdf8;
+
+color:white;
+
+font-size:16px;
+
+cursor:pointer;
+
+}
+
+
+
+button:hover{
+
+background:#0ea5e9;
+
+}
+
+
+
+/* KOMENTAR */
+
+
+.comment{
+
+background:#f8fafc;
+
+padding:20px;
+
+border-radius:15px;
+
+margin-bottom:15px;
+
+}
+
+
+
+.comment h3{
+
+color:#0d172b;
+
+}
+
+
+
+.rating{
+
+color:#ffc107;
+
+font-size:22px;
+
+}
+
+
+
+small{
+
+color:#777;
+
+}
+
+
+</style>
+
+
+</head>
+
+
+<body>
+
+
+
+<nav>
+
+
+<div class="logo">
+
+Planet CCTV
+
+</div>
+
+
+<div id="clock"></div>
+<div class="menu">
+
+
+<a href="/">Home</a>
+
+<a href="/about/">About</a>
+
+<a href="/pesan/">Pesan</a>
+
+<a href="/riwayat/">Riwayat</a>
+
+<a href="/rating/">Rating</a>
+
+<a href="/logout/">Logout</a>
+
+
+</div>
+
+
+</nav>
+
+
+
+
+
+<div class="container">
+
+
+
+<!-- FORM -->
+
+
+<div class="card">
+
+
+<h1>Beri Rating</h1>
+
+
+
+<form method="POST">
+
+
+{% csrf_token %}
+
+
+
+<label>
+Nama
+</label>
+
+
+<input 
+type="text"
+name="nama"
+placeholder="Nama anda"
+required>
+
+
+
+<label>
+Rating Pelayanan
+</label>
+
+
+
+<select name="rating" required>
+
+
+<option value="5">
+★★★★★
+</option>
+
+
+<option value="4">
+★★★★☆
+</option>
+
+
+<option value="3">
+★★★☆☆
+</option>
+
+
+<option value="2">
+★★☆☆☆
+</option>
+
+
+<option value="1">
+★☆☆☆☆
+</option>
+
+
+</select>
+
+
+
+
+<label>
+Komentar
+</label>
+
+
+<textarea
+
+name="komentar"
+
+placeholder="Tulis pengalaman anda..."
+
+required>
+
+</textarea>
+
+
+
+<button type="submit">
+
+Kirim Komentar
+
+</button>
+
+
+
+</form>
+
+
+</div>
+
+
+
+
+
+
+
+<!-- LIST KOMENTAR -->
+
+
+<div class="card">
+
+
+<h1>Komentar Pelanggan</h1>
+
+
+
+
+
+{% for item in komentar %}
+
+
+
+<div class="comment">
+
+
+
+<h3>
+
+{{item.nama}}
+
+</h3>
+
+
+
+
+<div class="rating">
+
+
+{% if item.rating == 5 %}
+
+★★★★★
+
+
+{% elif item.rating == 4 %}
+
+★★★★☆
+
+
+{% elif item.rating == 3 %}
+
+★★★☆☆
+
+
+{% elif item.rating == 2 %}
+
+★★☆☆☆
+
+
+{% else %}
+
+★☆☆☆☆
+
+
+{% endif %}
+
+
+</div>
+
+
+
+
+<p>
+
+{{item.komentar}}
+
+</p>
+
+
+
+
+<small>
+
+{{item.tanggal}}
+
+</small>
+
+
+
+</div>
+
+
+
+
+
+{% empty %}
+
+
+<p>
+
+Belum ada komentar
+
+</p>
+
+
+{% endfor %}
+
+
+
+
+</div>
+
+
+
+
+
+</div>
+
+
+
+<script>
+
+
+function updateClock(){
+
+
+let now = new Date();
+
+
+let jam = now.getHours()
+.toString()
+.padStart(2,'0');
+
+
+let menit = now.getMinutes()
+.toString()
+.padStart(2,'0');
+
+
+let detik = now.getSeconds()
+.toString()
+.padStart(2,'0');
+
+
+
+let tanggal = now.toLocaleDateString('id-ID',
+{
+    day:'2-digit',
+    month:'long',
+    year:'numeric'
+});
+
+
+
+document.getElementById("clock").innerHTML =
+
+tanggal + " | " + jam + ":" + menit + ":" + detik;
+
+
+}
+
+
+
+setInterval(updateClock,1000);
+
+
+updateClock();
+
+
+</script>
+</body>
+
+</html>

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hapus Pelanggan</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins', sans-serif;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#ef4444,#7f1d1d);
+    animation:fadePage 1s ease;
+}
+
+@keyframes fadePage{
+    from{opacity:0; transform:scale(0.95);}
+    to{opacity:1; transform:scale(1);}
+}
+
+.container{
+    width:500px;
+    background:white;
+    padding:40px;
+    border-radius:20px;
+    text-align:center;
+    box-shadow:0 10px 30px rgba(0,0,0,0.2);
+    animation:floatBox 3s ease-in-out infinite;
+}
+
+@keyframes floatBox{
+    0%{transform:translateY(0);}
+    50%{transform:translateY(-8px);}
+    100%{transform:translateY(0);}
+}
+
+.icon{font-size:60px; margin-bottom:20px;}
+
+h1{color:#dc2626; margin-bottom:10px;}
+
+p{color:gray; margin-bottom:25px;}
+
+.customer-box{
+    background:#fef2f2;
+    padding:15px;
+    border-radius:12px;
+    margin-bottom:25px;
+}
+
+.customer-box h3{color:#991b1b;}
+
+.buttons{
+    display:flex;
+    justify-content:center;
+    gap:15px;
+}
+
+/* BUTTON */
+.delete-btn{
+    background:#dc2626;
+    color:white;
+    padding:12px 25px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:bold;
+    transition:0.3s;
+}
+
+.delete-btn:hover{
+    background:#b91c1c;
+    transform:scale(1.05);
+}
+
+.cancel-btn{
+    background:#e5e7eb;
+    color:black;
+    padding:12px 25px;
+    text-decoration:none;
+    border-radius:10px;
+    font-weight:bold;
+    transition:0.3s;
+}
+
+.cancel-btn:hover{
+    background:#d1d5db;
+    transform:scale(1.05);
+}
+
+/* MODAL */
+.modal{
+    display:none;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.6);
+    justify-content:center;
+    align-items:center;
+}
+
+.modal-content{
+    background:white;
+    padding:30px;
+    border-radius:15px;
+    width:350px;
+    text-align:center;
+    animation:pop 0.3s ease;
+}
+
+@keyframes pop{
+    from{transform:scale(0.8); opacity:0;}
+    to{transform:scale(1); opacity:1;}
+}
+
+.modal-buttons{
+    margin-top:20px;
+    display:flex;
+    justify-content:center;
+    gap:10px;
+}
+
+@media(max-width:600px){
+    .container{
+        width:90%;
+        padding:25px;
+    }
+
+    .buttons{
+        flex-direction:column;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="icon">⚠️</div>
+
+    <h1>Hapus Pelanggan</h1>
+
+    <p>Apakah kamu yakin ingin menghapus data pelanggan berikut?</p>
+
+    <div class="customer-box">
+        <h3>{{ pelanggan.nama }}</h3>
+        <p>{{ pelanggan.no_hp }}</p>
+        <p>{{ pelanggan.paket }}</p>
+    </div>
+
+    <!-- FORM DELETE -->
+    <form id="deleteForm" method="POST" action="{% url 'hapus_pelanggan' pelanggan.id %}">
+        {% csrf_token %}
+
+        <div class="buttons">
+            <button type="button" class="delete-btn" onclick="openModal()">
+                Ya, Hapus
+            </button>
+
+            <a href="{% url 'dashboard' %}" class="cancel-btn">
+                Batal
+            </a>
+        </div>
+    </form>
+
+</div>
+
+<!-- MODAL -->
+<div id="confirmModal" class="modal">
+    <div class="modal-content">
+
+        <h2>Konfirmasi Hapus</h2>
+        <p>Data yang dihapus tidak bisa dikembalikan!</p>
+
+        <div class="modal-buttons">
+            <button class="delete-btn" onclick="submitDelete()">
+                Hapus Sekarang
+            </button>
+
+            <button class="cancel-btn" onclick="closeModal()">
+                Batal
+            </button>
+        </div>
+
+    </div>
+</div>
+
+<script>
+function openModal(){
+    document.getElementById("confirmModal").style.display = "flex";
+}
+
+function closeModal(){
+    document.getElementById("confirmModal").style.display = "none";
+}
+
+function submitDelete(){
+    document.getElementById("deleteForm").submit();
+}
+
+window.onclick = function(event){
+    let modal = document.getElementById("confirmModal");
+    if(event.target === modal){
+        modal.style.display = "none";
+    }
+}
+</script>
+
+</body>
+</html>

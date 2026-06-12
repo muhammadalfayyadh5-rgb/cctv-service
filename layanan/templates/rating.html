@@ -1,0 +1,353 @@
+{% load tz %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Rating - Planet CCTV</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+
+body{
+    background:#f4f7fb;
+}
+
+
+/* NAVBAR */
+
+nav{
+    height:90px;
+    background:#0d172b;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:0 80px;
+}
+
+
+.logo{
+    color:#38bdf8;
+    font-size:28px;
+    font-weight:700;
+}
+
+
+.menu a,
+.menu a:link,
+.menu a:visited,
+.menu a:active {
+    color: white !important;
+    text-decoration: none;
+    margin-left: 25px;
+    font-size: 16px;
+    transition: 0.2s;
+}
+
+.menu a:hover {
+    color: #38bdf8 !important;
+}
+
+
+
+/* RATING */
+
+.rating-section{
+    min-height:calc(100vh - 90px);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:40px;
+}
+
+
+.rating-box{
+
+    background:white;
+    width:500px;
+    padding:40px;
+
+    border-radius:20px;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.15);
+
+    text-align:center;
+
+}
+
+
+.rating-box h1{
+    color:#0d172b;
+    margin-bottom:15px;
+}
+
+
+.rating-box p{
+    color:#555;
+}
+
+
+
+/* STAR */
+
+.stars{
+
+    display:flex;
+    justify-content:center;
+
+    margin:25px 0;
+
+    gap:10px;
+
+}
+
+
+.star{
+
+    font-size:45px;
+    color:#ccc;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+
+.star:hover,
+.star.active{
+
+    color:#ffc107;
+
+    transform:scale(1.2);
+
+}
+
+
+
+textarea{
+
+    width:100%;
+    height:120px;
+
+    padding:15px;
+
+    border-radius:12px;
+
+    border:1px solid #ddd;
+
+    resize:none;
+
+    margin-bottom:20px;
+
+}
+
+
+
+button{
+
+    width:100%;
+
+    padding:14px;
+
+    border:none;
+
+    border-radius:30px;
+
+    background:#38bdf8;
+
+    color:white;
+
+    font-size:16px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+}
+
+
+button:hover{
+
+    background:#0ea5e9;
+
+}
+
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<nav>
+
+<div class="logo">
+Planet CCTV
+</div>
+
+
+<div class="menu">
+
+<a href="/">Home</a>
+
+<a href="/about/">About</a>
+
+<a href="/pesan/">Pesan</a>
+
+<a href="/riwayat/">Riwayat</a>
+
+<a href="/rating/">Rating</a>
+
+<a href="/logout/">Logout</a>
+
+
+</div>
+
+
+</nav>
+
+
+
+
+
+<section class="rating-section">
+
+
+<div class="rating-box">
+
+
+<h1>Beri Rating Pelayanan</h1>
+
+
+<p>
+Bagaimana pengalaman Anda menggunakan jasa instalasi CCTV kami?
+</p>
+
+
+
+<div class="stars">
+
+
+<span class="star" onclick="rate(1)">★</span>
+<span class="star" onclick="rate(2)">★</span>
+<span class="star" onclick="rate(3)">★</span>
+<span class="star" onclick="rate(4)">★</span>
+<span class="star" onclick="rate(5)">★</span>
+
+
+</div>
+
+
+
+<textarea placeholder="Tulis komentar Anda..."></textarea>
+
+
+<button>
+Kirim Rating
+</button>
+
+
+<!-- DAFTAR KOMENTAR -->
+
+<div class="comment-list">
+
+
+{% for item in rating %}
+
+<div class="comment-card">
+
+<h3>
+{{ item.nama }}
+</h3>
+
+
+<div class="comment-star">
+
+{% for i in "12345" %}
+★
+{% endfor %}
+
+</div>
+
+
+<p>
+{{ item.komentar }}
+</p>
+
+
+<small>
+{{ item.created_at|localtime|date:"d F Y, H:i" }}
+</small>
+
+
+</div>
+
+
+{% endfor %}
+
+
+</div>
+
+
+
+</div>
+
+
+
+</section>
+
+
+
+
+
+<script>
+
+
+function rate(value){
+
+
+let stars=document.querySelectorAll(".star");
+
+
+stars.forEach((star,index)=>{
+
+
+if(index < value){
+
+star.classList.add("active");
+
+}
+
+else{
+
+star.classList.remove("active");
+
+}
+
+
+});
+
+
+}
+
+
+
+</script>
+
+
+
+</body>
+</html>
