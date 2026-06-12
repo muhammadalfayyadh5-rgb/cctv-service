@@ -23,11 +23,11 @@ class Pelanggan(models.Model):
     )
 
 
-    bukti_pembayaran = models.FileField(
-        upload_to='bukti_pembayaran/',
-        blank=True,
-        null=True
-    )
+    bukti_pembayaran = models.ImageField(
+    upload_to='bukti_pembayaran/',
+    blank=True,
+    null=True
+)
 
 
     def __str__(self):
