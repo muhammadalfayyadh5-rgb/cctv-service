@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 
 <html lang="en">
@@ -94,6 +95,37 @@ body{
     box-shadow:0 5px 15px rgba(0,0,0,.1);
 }
 
+.team-img{
+    width:150px;
+    height:150px;
+    border-radius:50%;
+    object-fit:cover;
+    object-position:center;
+    border:4px solid #2563eb;
+    box-shadow:0 5px 15px rgba(0,0,0,.15);
+}
+
+.stat{
+    background:white;
+    padding:25px;
+    text-align:center;
+    border-radius:15px;
+    box-shadow:0 5px 15px rgba(0,0,0,.1);
+    transition:.3s;
+}
+
+.stat:hover{
+    transform:translateY(-8px);
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,350px));
+    justify-content:center;
+    gap:25px;
+    margin-top:30px;
+}
+
 .btn{
     display:inline-block;
     margin-top:30px;
@@ -133,42 +165,61 @@ footer{
 
 <section class="hero">
     <h1>Tentang Planet CCTV</h1>
-    <p>Solusi Keamanan Modern dan Profesional</p>
+    <p>
+        Solusi Keamanan Modern dan Profesional
+        Untuk Rumah, Toko, Kantor, Gudang dan Sekolah
+    </p>
+
+    <a href="/pesan/" class="btn">
+        Pesan Sekarang
+    </a>
 </section>
 
-<div class="container">
-
-```
 <div class="about-box">
 
-    <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3">
+    <img src="https://images.unsplash.com/photo-1558002038-1055907df827?auto=format&fit=crop&w=1200&q=80">
 
     <div class="about-content">
-
-        <h2>Siapa Kami?</h2>
+        <h2>Tentang Planet CCTV</h2>
 
         <p>
-            Planet CCTV adalah perusahaan yang bergerak dalam
-            bidang pemasangan, perawatan, dan konsultasi sistem
-            keamanan CCTV untuk rumah, kantor, toko, gudang,
-            sekolah, dan berbagai kebutuhan lainnya.
+            Planet CCTV adalah penyedia layanan pemasangan dan
+            perawatan CCTV profesional yang melayani rumah,
+            kantor, toko, gudang, sekolah, rumah ibadah,
+            apartemen, dan berbagai kebutuhan keamanan lainnya.
         </p>
 
         <p>
-            Dengan dukungan teknisi profesional dan perangkat
-            berkualitas tinggi, kami siap memberikan solusi
-            keamanan terbaik bagi pelanggan.
+            Kami percaya bahwa keamanan merupakan investasi
+            penting bagi setiap orang. Oleh karena itu kami
+            menyediakan produk CCTV berkualitas tinggi dengan
+            harga yang kompetitif.
         </p>
 
+        <p>
+            Tim teknisi kami berpengalaman dan siap membantu
+            proses konsultasi, pemasangan, konfigurasi hingga
+            monitoring CCTV melalui smartphone.
+        </p>
     </div>
 
 </div>
+
+</section>
+
+
+<!-- STATISTIK -->
+<section class="container">
+
+<h2 style="text-align:center;margin-bottom:30px;">
+Pencapaian Kami
+</h2>
 
 <div class="stats">
 
     <div class="stat">
         <h2>500+</h2>
-        <p>Pelanggan</p>
+        <p>Pelanggan Aktif</p>
     </div>
 
     <div class="stat">
@@ -178,42 +229,302 @@ footer{
 
     <div class="stat">
         <h2>24/7</h2>
-        <p>Support</p>
+        <p>Support Teknis</p>
+    </div>
+
+    <div class="stat">
+        <h2>1000+</h2>
+        <p>Kamera Terpasang</p>
     </div>
 
 </div>
 
-<div class="visi-misi">
+</section>
 
-    <div class="card">
-        <h2>Visi</h2>
-        <p>
-            Menjadi penyedia layanan CCTV terpercaya di Indonesia
-            dengan teknologi keamanan terbaik.
+
+<!-- VISI MISI -->
+<section class="container">
+
+<h2 style="text-align:center;">
+Visi & Misi
+</h2>
+
+<div class="card">
+
+<h3>Visi</h3>
+
+<p>
+Menjadi perusahaan instalasi CCTV terpercaya di Indonesia
+yang mampu memberikan solusi keamanan modern, berkualitas,
+dan mudah diakses oleh semua kalangan.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>Misi</h3>
+
+<ul style="padding-left:20px;line-height:2;">
+<li>Memberikan layanan pemasangan profesional.</li>
+<li>Menyediakan produk CCTV berkualitas tinggi.</li>
+<li>Memberikan harga yang kompetitif.</li>
+<li>Memberikan layanan after sales terbaik.</li>
+<li>Mengutamakan kepuasan pelanggan.</li>
+</ul>
+
+</div>
+
+</section>
+
+
+<!-- KEUNGGULAN -->
+<section class="container">
+
+<h2 style="text-align:center;">
+Mengapa Memilih Planet CCTV?
+</h2>
+
+<div class="stats">
+
+<div class="stat">
+<i class="fa-solid fa-shield-halved"
+style="font-size:40px;color:#2563eb;"></i>
+
+<h3 style="margin-top:15px;">
+Keamanan Maksimal
+</h3>
+
+<p>
+Sistem CCTV berkualitas dengan hasil gambar jernih.
+</p>
+</div>
+
+<div class="stat">
+<i class="fa-solid fa-screwdriver-wrench"
+style="font-size:40px;color:#2563eb;"></i>
+
+<h3 style="margin-top:15px;">
+Teknisi Profesional
+</h3>
+
+<p>
+Dikerjakan oleh tenaga ahli berpengalaman.
+</p>
+</div>
+
+<div class="stat">
+<i class="fa-solid fa-mobile-screen"
+style="font-size:40px;color:#2563eb;"></i>
+
+<h3 style="margin-top:15px;">
+Monitoring HP
+</h3>
+
+<p>
+Pantau CCTV langsung dari smartphone.
+</p>
+</div>
+
+<div class="stat">
+<i class="fa-solid fa-headset"
+style="font-size:40px;color:#2563eb;"></i>
+
+<h3 style="margin-top:15px;">
+Support 24 Jam
+</h3>
+
+<p>
+Layanan bantuan kapan saja dibutuhkan.
+</p>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- LAYANAN -->
+<section class="container">
+
+<h2 style="text-align:center;">
+Layanan Kami
+</h2>
+
+<div class="stats">
+
+<div class="stat">
+<h3>Instalasi CCTV</h3>
+<p>Pemasangan untuk rumah, toko, kantor dan gudang.</p>
+</div>
+
+<div class="stat">
+<h3>Maintenance CCTV</h3>
+<p>Perawatan dan pengecekan rutin sistem CCTV.</p>
+</div>
+
+<div class="stat">
+<h3>Perbaikan CCTV</h3>
+<p>Perbaikan DVR, NVR, kamera dan jaringan.</p>
+</div>
+
+<div class="stat">
+<h3>Konsultasi Gratis</h3>
+<p>Rekomendasi kamera sesuai kebutuhan pelanggan.</p>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- TIM -->
+<section class="container">
+
+<h2 style="text-align:center;">
+Tim Profesional Kami
+</h2>
+
+<div class="stats">
+
+    <!-- TIM 1 -->
+    <div class="stat">
+
+        <img src="{% static 'images/alfayyadh.jpg' %}"
+        class="team-img">
+
+        <h3 style="margin-top:15px;">
+            Muhammad Alfayyadh
+        </h3>
+
+        <p><b>Engineering Senior</b></p>
+
+        <p style="margin-top:10px;color:#64748b;">
+            Berpengalaman dalam pemasangan, konfigurasi,
+            dan perawatan sistem CCTV untuk rumah,
+            toko, kantor, serta berbagai kebutuhan
+            keamanan lainnya dengan hasil yang rapi
+            dan profesional.
         </p>
+
     </div>
 
-    <div class="card">
-        <h2>Misi</h2>
-        <p>
-            Memberikan layanan pemasangan CCTV profesional,
-            harga terjangkau, dan dukungan teknis terbaik.
+    <!-- TIM 2 -->
+    <div class="stat">
+
+        <img src="{% static 'images/farhan.jpg' %}"
+        class="team-img">
+
+        <h3 style="margin-top:15px;">
+            Muhammad Farhan Zaid
+        </h3>
+
+        <p><b>Network Engineer</b></p>
+
+        <p style="margin-top:10px;color:#64748b;">
+            Spesialis konfigurasi jaringan, DVR, NVR,
+            akses CCTV online, serta integrasi sistem
+            monitoring untuk memastikan koneksi CCTV
+            berjalan stabil dan aman.
         </p>
+
     </div>
 
 </div>
+
+</section>
+
+<h2 style="text-align:center;">
+Galeri Pemasangan CCTV
+</h2>
+
+<div class="stats">
+
+<div class="stat">
+<img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3"
+style="width:100%;border-radius:10px;">
+</div>
+
+<div class="stat">
+<img src="https://images.unsplash.com/photo-1558002038-1055907df827"
+style="width:100%;border-radius:10px;">
+</div>
+
+<div class="stat">
+<img src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a"
+style="width:100%;border-radius:10px;">
+</div>
+
+</div>
+
+</section>
+
+<section class="container">
+
+<h2 style="text-align:center;">
+Pertanyaan Umum
+</h2>
+
+<div class="card">
+<h3>Apakah CCTV bisa dipantau lewat HP?</h3>
+<p>Ya, seluruh paket CCTV dapat dipantau melalui smartphone Android maupun iPhone.</p>
+</div>
+
+<div class="card">
+<h3>Berapa lama pemasangan?</h3>
+<p>Umumnya 1 hari kerja tergantung jumlah kamera dan lokasi.</p>
+</div>
+
+<div class="card">
+<h3>Apakah ada garansi?</h3>
+<p>Ya, tersedia garansi perangkat dan instalasi.</p>
+</div>
+
+</section>
+
+
+<!-- KONTAK -->
+<section class="container">
+
+<div class="card">
+
+<h2>Hubungi Kami</h2>
+
+<p>
+📍 Alamat : Lhokseumawe, Aceh
+</p>
+
+<p>
+📞 Telepon : 0812-6271-3159
+</p>
+
+<p>
+✉️ Email : planetcctv@gmail.com
+</p>
+
+<p>
+🕒 Jam Operasional : Senin - Minggu (24 Jam)
+</p>
 
 <center>
-    <a href="/" class="btn">
-        Kembali ke Home
-    </a>
+
+<a href="/" class="btn">
+ Kembali ke Home
+</a>
+
 </center>
-```
 
 </div>
 
+</section>
+
+
+<!-- FOOTER -->
 <footer>
-    © 2026 Planet CCTV
+    <h3>Planet CCTV</h3>
+    <p>Solusi Keamanan Modern Untuk Rumah, Toko, Kantor dan Gudang</p>
+    <br>
+    <p>© 2026 Planet CCTV. All Rights Reserved.</p>
 </footer>
 
 </body>

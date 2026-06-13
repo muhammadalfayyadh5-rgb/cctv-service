@@ -219,6 +219,28 @@ tr:hover{
     box-shadow:0 8px 20px rgba(255,0,0,0.4);
 }
 
+.table-actions{
+    text-align:center;
+    margin-top:25px;
+}
+
+.btn-kembali{
+    display:inline-block;
+    background:#2563eb;
+    color:white;
+    padding:12px 25px;
+    border-radius:10px;
+    text-decoration:none;
+    font-weight:bold;
+    transition:.3s;
+}
+
+.btn-kembali:hover{
+    background:#1d4ed8;
+    transform:translateY(-3px);
+    box-shadow:0 8px 20px rgba(37,99,235,.3);
+}
+
 /* Click animation */
 .edit-btn:active,
 .delete-btn:active{
@@ -241,11 +263,12 @@ tr:hover{
 <body>
 
 <div class="header">
-    <h1 id="dashboard-title">Pelanggan CCTV</h1>
+    <h1 id="riwayat-title">Pelanggan CCTV</h1>
 
     <div class="header-buttons">
-        <a href="/" class="btn-home">Home</a>
-        <a href="/pesan/" class="btn-add">+ Tambah Pelanggan</a>
+        <a href="{% url 'pesan' %}" class="btn-add">
+            + Tambah Pelanggan
+        </a>
     </div>
 </div>
 
@@ -289,7 +312,6 @@ tr:hover{
                 <th>No WhatsApp</th>
                 <th>Paket CCTV</th>
                 <th>Status</th>
-                <th>Bukti Pembayaran</th>
                 <th>Aksi</th>
             </tr>
 
@@ -309,22 +331,6 @@ tr:hover{
     {% endif %}
 </td>
 
-<td>
-    {% if p.bukti_pembayaran %}
-        <a href="{{ p.bukti_pembayaran.url }}" target="_blank">
-            <img src="{{ pelanggan.bukti_pembayaran.url }}"
-                 style="
-                    width:80px;
-                    height:80px;
-                    object-fit:cover;
-                    border-radius:10px;
-                    border:2px solid #2563eb;
-                 ">
-                        </a>
-                    {% else %}
-                        Belum Upload
-                    {% endif %}
-                </td>
 
                 <td>
                     <a href="{% url 'edit' p.id %}" class="edit-btn">Edit</a>
@@ -335,6 +341,17 @@ tr:hover{
             {% endfor %}
         </table>
     </div>
+
+    </table>
+</div>
+
+<div class="table-actions">
+    <a href="{% url 'home' %}" class="btn-kembali">
+        ← Kembali ke Halaman Utama
+    </a>
+</div>
+
+</div>
 
 </div>
 
