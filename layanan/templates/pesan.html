@@ -26,9 +26,9 @@ body{
 /* CARD LEBIH RESPONSIVE */
 .container{
     width:100%;
-    max-width:520px;
+    max-width:720px;
     background:white;
-    padding:35px;
+    padding:50px;
     border-radius:22px;
     box-shadow:0 20px 50px rgba(0,0,0,.35);
     animation:fadeIn 0.6s ease;
@@ -262,8 +262,8 @@ button:hover{
 
     <div id="strukIsi"></div>
 
-    <button type="button" class="btn-wa" onclick="kirimWA()">
-        Kirim ke WhatsApp
+    <button type="button" class="btn-wa" onclick="submitPesanan()">
+    Konfirmasi Pesanan
     </button>
 
     <button type="button" class="btn-close" onclick="tutupModal()">
@@ -285,10 +285,45 @@ button:hover{
     </div>
 
     <div class="info-box">
-        <b>Transfer Pembayaran:</b><br>
-        Bank BSI : 7299112588<br>
-        a.n. Muhammad Al Fayyadh
+        <h3 style="margin-top:20px;">Metode Pembayaran</h3>
+
+<div class="payment-grid">
+
+    <!-- TRANSFER BANK -->
+    <div class="payment-card">
+        <h4>Transfer Bank</h4>
+        <p>BCA : 1234567890</p>
+        <p>BRI : 0987654321</p>
+        <p>BNI : 1122334455</p>
+        <p>Mandiri : 2233445566</p>
+        <p>BSI : 7299112588</p>
+        <p><b>A/n: Muhammad Al Fayyadh</b></p>
     </div>
+
+    <!-- QRIS -->
+    <div class="payment-card">
+        <h4>QRIS</h4>
+        <p>Bisa bayar dari semua aplikasi:</p>
+        <p>DANA, OVO, GoPay, ShopeePay, Mobile Banking</p>
+    </div>
+
+    <!-- E-WALLET -->
+    <div class="payment-card">
+        <h4>E-Wallet</h4>
+        <p>DANA : 0812-6271-3159</p>
+        <p>OVO : 0812-6271-3159</p>
+        <p>GoPay : 0812-6271-3159</p>
+        <p>ShopeePay : 0812-6271-3159</p>
+    </div>
+
+    <!-- COD -->
+    <div class="payment-card">
+        <h4>COD</h4>
+        <p>Bayar saat barang sampai</p>
+        <p>(area tertentu)</p>
+    </div>
+
+</div>
 
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
@@ -433,6 +468,12 @@ No HP: ${no_hp}%0A
 Paket: ${paket}`;
 
     window.open("https://wa.me/6281262713159?text=" + text, "_blank");
+}
+</script>
+
+<script>
+function submitPesanan(){
+    document.querySelector("form").submit();
 }
 </script>
 

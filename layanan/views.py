@@ -60,11 +60,12 @@ def riwayat(request):
 def pesan(request):
     if request.method == "POST":
 
-        nama = request.POST.get('nama')
-        alamat = request.POST.get('alamat')
-        no_hp = request.POST.get('no_hp')
-        paket = request.POST.get('paket')
-        bukti = request.FILES.get('bukti_pembayaran')
+        nama = request.POST.get("nama")
+        alamat = request.POST.get("alamat")
+        no_hp = request.POST.get("no_hp")
+        paket = request.POST.get("paket")
+
+        bukti = request.FILES.get("bukti_pembayaran")
 
         Pelanggan.objects.create(
             nama=nama,
@@ -106,12 +107,18 @@ def edit_pelanggan(request, id):
         pelanggan.status = request.POST['status']
 
         if request.FILES.get('bukti_pembayaran'):
-            pelanggan.bukti_pembayaran = request.FILES.get('bukti_pembayaran')
+            pelanggan.bukti_pembayaran = request.FILES.get(
+                'bukti_pembayaran'
+            )
 
         pelanggan.save()
         return redirect('riwayat')
 
-    return render(request, 'edit.html', {'pelanggan': pelanggan})
+    return render(
+        request,
+        'edit.html',
+        {'pelanggan': pelanggan}
+    )
 
 
 # =======================
@@ -119,7 +126,11 @@ def edit_pelanggan(request, id):
 # =======================
 def konfirmasi_hapus(request, id):
     pelanggan = get_object_or_404(Pelanggan, id=id)
-    return render(request, 'hapus.html', {'pelanggan': pelanggan})
+    return render(
+        request,
+        'hapus.html',
+        {'pelanggan': pelanggan}
+    )
 
 
 def hapus_pelanggan(request, id):
@@ -153,6 +164,10 @@ def rating(request):
 
     komentar = Rating.objects.all().order_by('-tanggal')
 
-    return render(request, 'komentar_rating.html', {
-        'komentar': komentar
-    })
+    return render(
+        request,
+        'komentar_rating.html',
+        {
+            'komentar': komentar
+        }
+    )
