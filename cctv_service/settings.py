@@ -27,7 +27,6 @@ DEBUG = False
 
 ALLOWED_HOSTS = [
     "muhammadalfayyadh5.pythonanywhere.com",
-    ".pythonanywhere.com",
     "localhost",
     "127.0.0.1",
 ]
@@ -131,7 +130,3 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-CSRF_TRUSTED_ORIGINS = [
-    "https://muhammadalfayyadh5.pythonanywhere.com",
-]
