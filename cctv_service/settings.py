@@ -26,9 +26,10 @@ SECRET_KEY = 'django-insecure-he5c0p^_%(z!50@#q0#w()-!ooycivj8_ck#xh(brs4v+))7e&
 DEBUG = False
 
 ALLOWED_HOSTS = [
-    'muhammadalfayyadh5.pythonanywhere.com',
-    'localhost',
-    '127.0.0.1',
+    "iComputerUSER7.pythonanywhere.com",
+    ".pythonanywhere.com",
+    "localhost",
+    "127.0.0.1",
 ]
 
 
@@ -130,3 +131,7 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://iComputerUSER7.pythonanywhere.com",
+]

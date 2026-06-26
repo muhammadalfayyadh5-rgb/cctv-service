@@ -76,6 +76,52 @@ label{
     border:3px solid white;
 }
 
+.paket-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:12px;
+    margin-top:10px;
+}
+
+.paket-card{
+    border:1px solid rgba(255,255,255,.3);
+    padding:15px;
+    border-radius:12px;
+    cursor:pointer;
+    background:rgba(255,255,255,.08);
+    color:white;
+    transition:.3s;
+}
+
+.paket-card input{
+    display:none;
+}
+
+.paket-card:hover{
+    transform:translateY(-3px);
+    border-color:#60a5fa;
+}
+
+.paket-card:has(input:checked){
+    background:#2563eb;
+    border-color:#93c5fd;
+}
+
+.paket-card h3{
+    margin-bottom:5px;
+}
+
+.paket-card p{
+    font-size:13px;
+    opacity:.9;
+}
+
+.paket-card b{
+    display:block;
+    margin-top:8px;
+    color:#facc15;
+}
+
 button{
     width:100%;
     padding:14px;
@@ -143,23 +189,80 @@ button:hover{
             required
         >
 
-        <select name="paket" required>
-            <option value="{{ pelanggan.paket }}">
-                {{ pelanggan.paket }}
-            </option>
+        <h3 style="color:white; margin-top:15px;">
+    Pilih Paket CCTV
+</h3>
 
-            <option value="2 Kamera CCTV">
-                2 Kamera CCTV - Rp1.500.000
-            </option>
+<div class="paket-grid">
 
-            <option value="4 Kamera CCTV">
-                4 Kamera CCTV - Rp2.500.000
-            </option>
+    <label class="paket-card">
+        <input type="radio"
+               name="paket"
+               value="Paket Rumah - 1.500.000"
+               {% if pelanggan.paket == "Paket Rumah - 1.500.000" %}checked{% endif %}
+               required>
+        <h3>Paket Rumah</h3>
+        <p>2 - 4 Kamera</p>
+        <p>Rumah / Kos</p>
+        <b>Rp 1.500.000</b>
+    </label>
 
-            <option value="8 Kamera CCTV">
-                8 Kamera CCTV - Rp4.500.000
-            </option>
-        </select>
+    <label class="paket-card">
+        <input type="radio"
+               name="paket"
+               value="Paket Apartemen - 1.200.000"
+               {% if pelanggan.paket == "Paket Apartemen - 1.200.000" %}checked{% endif %}>
+        <h3>Paket Apartemen</h3>
+        <p>1 - 3 Kamera</p>
+        <p>Unit / Kamar</p>
+        <b>Rp 1.200.000</b>
+    </label>
+
+    <label class="paket-card">
+        <input type="radio"
+               name="paket"
+               value="Paket Toko - 3.000.000"
+               {% if pelanggan.paket == "Paket Toko - 3.000.000" %}checked{% endif %}>
+        <h3>Paket Toko</h3>
+        <p>4 - 6 Kamera</p>
+        <p>Warung / UMKM</p>
+        <b>Rp 3.000.000</b>
+    </label>
+
+    <label class="paket-card">
+        <input type="radio"
+               name="paket"
+               value="Paket Kantor - 5.500.000"
+               {% if pelanggan.paket == "Paket Kantor - 5.500.000" %}checked{% endif %}>
+        <h3>Paket Kantor</h3>
+        <p>6 - 8 Kamera</p>
+        <p>Perkantoran</p>
+        <b>Rp 5.500.000</b>
+    </label>
+
+    <label class="paket-card">
+        <input type="radio"
+               name="paket"
+               value="Paket Pabrik - 10.000.000"
+               {% if pelanggan.paket == "Paket Pabrik - 10.000.000" %}checked{% endif %}>
+        <h3>Paket Pabrik</h3>
+        <p>8 - 16 Kamera</p>
+        <p>Area Besar</p>
+        <b>Rp 10.000.000</b>
+    </label>
+
+    <label class="paket-card">
+        <input type="radio"
+               name="paket"
+               value="Paket Premium - 15.000.000"
+               {% if pelanggan.paket == "Paket Premium - 15.000.000" %}checked{% endif %}>
+        <h3>Paket Premium</h3>
+        <p>16+ Kamera</p>
+        <p>Gedung Besar</p>
+        <b>Rp 15.000.000</b>
+    </label>
+
+</div>
 
         <select name="status" required>
             <option value="{{ pelanggan.status }}">
@@ -182,27 +285,6 @@ button:hover{
                 Selesai
             </option>
         </select>
-
-        <label>
-            Bukti Pembayaran
-        </label>
-
-        {% if pelanggan.bukti_pembayaran %}
-            <img
-                src="{{ pelanggan.bukti_pembayaran.url }}"
-                class="preview-img"
-            >
-        {% else %}
-            <p style="color:white;margin-top:10px;">
-                Belum ada bukti pembayaran
-            </p>
-        {% endif %}
-
-        <input
-            type="file"
-            name="bukti_pembayaran"
-            accept="image/*"
-        >
 
         <button type="submit">
             Update Data

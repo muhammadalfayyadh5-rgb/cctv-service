@@ -1,7 +1,15 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
 class Pelanggan(models.Model):
+
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True
+    )
 
     STATUS_CHOICES = [
         ('Menunggu Pembayaran', 'Menunggu Pembayaran'),
@@ -9,7 +17,6 @@ class Pelanggan(models.Model):
         ('Diproses', 'Diproses'),
         ('Selesai', 'Selesai'),
     ]
-
 
     nama = models.CharField(max_length=100)
     alamat = models.TextField()
@@ -22,13 +29,11 @@ class Pelanggan(models.Model):
         default='Menunggu Pembayaran'
     )
 
-
     bukti_pembayaran = models.ImageField(
-    upload_to='bukti_pembayaran/',
-    blank=True,
-    null=True
-)
-
+        upload_to='bukti_pembayaran/',
+        blank=True,
+        null=True
+    )
 
     def __str__(self):
         return self.nama

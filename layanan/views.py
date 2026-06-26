@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
 from urllib.parse import quote
+from datetime import datetime
 
 from .models import (
     Pelanggan,
@@ -31,20 +33,24 @@ def home(request):
 # =======================
 # RIWAYAT
 # =======================
+@login_required
 def riwayat(request):
-    pelanggan = Pelanggan.objects.all()
 
-    selesai = Pelanggan.objects.filter(
-        status="Selesai"
-    ).count()
+    if request.user.is_staff:
+        # ADMIN LIHAT SEMUA DATA
+        pelanggan = Pelanggan.objects.all()
 
-    proses = Pelanggan.objects.filter(
-        status="Diproses"
-    ).count()
+        selesai = Pelanggan.objects.filter(status="Selesai").count()
+        proses = Pelanggan.objects.filter(status="Diproses").count()
+        verifikasi = Pelanggan.objects.filter(status="Menunggu Verifikasi").count()
 
-    verifikasi = Pelanggan.objects.filter(
-        status="Menunggu Verifikasi"
-    ).count()
+    else:
+        # PELANGGAN HANYA LIHAT PUNYA DIA SENDIRI
+        pelanggan = Pelanggan.objects.filter(user=request.user)
+
+        selesai = pelanggan.filter(status="Selesai").count()
+        proses = pelanggan.filter(status="Diproses").count()
+        verifikasi = pelanggan.filter(status="Menunggu Verifikasi").count()
 
     return render(request, 'riwayat.html', {
         'pelanggan': pelanggan,
@@ -58,7 +64,10 @@ def riwayat(request):
 # PESAN
 # =======================
 def pesan(request):
+    print("METHOD =", request.method)
+
     if request.method == "POST":
+        print("POST MASUK")
 
         nama = request.POST.get("nama")
         alamat = request.POST.get("alamat")
@@ -68,26 +77,60 @@ def pesan(request):
         bukti = request.FILES.get("bukti_pembayaran")
 
         Pelanggan.objects.create(
-            nama=nama,
-            alamat=alamat,
-            no_hp=no_hp,
-            paket=paket,
-            status="Menunggu Verifikasi",
-            bukti_pembayaran=bukti
-        )
+        user=request.user,
+        nama=nama,
+        alamat=alamat,
+        no_hp=no_hp,
+        paket=paket,
+        status="Menunggu Verifikasi",
+        bukti_pembayaran=bukti
+    )
+
+        # Tentukan DP berdasarkan paket
+        if paket == "Paket Rumah - 1.500.000":
+            dp = "Rp 300.000"
+        elif paket == "Paket Toko - 3.000.000":
+            dp = "Rp 500.000"
+        elif paket == "Paket Kantor - 5.500.000":
+            dp = "Rp 1.000.000"
+        else:
+            dp = "Menyesuaikan Paket"
+
+        kode = "CCTV-" + datetime.now().strftime("%H%M%S")
+
+        print("PAKET DARI FORM =", paket)
+        print("DP =", dp)
 
         pesan_wa = f"""
-PESANAN BARU CCTV
+Halo Admin CCTV
 
-Nama: {nama}
-No HP: {no_hp}
-Paket: {paket}
-Alamat: {alamat}
+Saya ingin konsultasi pemasangan CCTV.
 
-Bukti pembayaran telah diupload.
+Kode Konsultasi:
+{kode}
+
+Nama:
+{nama}
+
+Alamat:
+{alamat}
+
+WhatsApp:
+{no_hp}
+
+Paket yang diminati:
+{paket}
+
+Estimasi DP Pemesanan:
+{dp}
+
+Mohon dilakukan verifikasi kebutuhan lokasi dan estimasi biaya terlebih dahulu.
+
+Terima kasih.
 """
 
         wa_url = f"https://wa.me/{ADMIN_WA}?text={quote(pesan_wa)}"
+
         return redirect(wa_url)
 
     return render(request, 'pesan.html')
@@ -106,10 +149,6 @@ def edit_pelanggan(request, id):
         pelanggan.paket = request.POST['paket']
         pelanggan.status = request.POST['status']
 
-        if request.FILES.get('bukti_pembayaran'):
-            pelanggan.bukti_pembayaran = request.FILES.get(
-                'bukti_pembayaran'
-            )
 
         pelanggan.save()
         return redirect('riwayat')
