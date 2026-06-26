@@ -26,9 +26,15 @@ SECRET_KEY = 'django-insecure-he5c0p^_%(z!50@#q0#w()-!ooycivj8_ck#xh(brs4v+))7e&
 DEBUG = False
 
 ALLOWED_HOSTS = [
-    "muhammadalfayyadh5.pythonanywhere.com",
-    "localhost",
+    "icomputeruser7.pythonanywhere.com",
+    "www.icomputeruser7.pythonanywhere.com",
     "127.0.0.1",
+    "localhost",
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://icomputeruser7.pythonanywhere.com",
+    "https://www.icomputeruser7.pythonanywhere.com",
 ]
 
 
