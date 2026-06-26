@@ -26,9 +26,9 @@ SECRET_KEY = 'django-insecure-he5c0p^_%(z!50@#q0#w()-!ooycivj8_ck#xh(brs4v+))7e&
 DEBUG = False
 
 ALLOWED_HOSTS = [
-    '.onrender.com',
+    'muhammadalfayyadh5.pythonanywhere.com',
     'localhost',
-    '127.0.0.1'
+    '127.0.0.1',
 ]
 
 
@@ -125,7 +125,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / "staticfiles"
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
