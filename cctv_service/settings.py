@@ -27,7 +27,7 @@ DEBUG = False
 
 ALLOWED_HOSTS = [
     "icomputeruser7.pythonanywhere.com",
-    "iComputerUSER7.pythonanywhere.com",
+    "www.icomputeruser7.pythonanywhere.com",
     "localhost",
     "127.0.0.1",
 ]

@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth.decorators import login_required
 from urllib.parse import quote
 from datetime import datetime
 
@@ -33,24 +32,13 @@ def home(request):
 # =======================
 # RIWAYAT
 # =======================
-@login_required
 def riwayat(request):
 
-    if request.user.is_staff:
-        # ADMIN LIHAT SEMUA DATA
-        pelanggan = Pelanggan.objects.all()
+    pelanggan = Pelanggan.objects.all()
 
-        selesai = Pelanggan.objects.filter(status="Selesai").count()
-        proses = Pelanggan.objects.filter(status="Diproses").count()
-        verifikasi = Pelanggan.objects.filter(status="Menunggu Verifikasi").count()
-
-    else:
-        # PELANGGAN HANYA LIHAT PUNYA DIA SENDIRI
-        pelanggan = Pelanggan.objects.filter(user=request.user)
-
-        selesai = pelanggan.filter(status="Selesai").count()
-        proses = pelanggan.filter(status="Diproses").count()
-        verifikasi = pelanggan.filter(status="Menunggu Verifikasi").count()
+    selesai = pelanggan.filter(status="Selesai").count()
+    proses = pelanggan.filter(status="Diproses").count()
+    verifikasi = pelanggan.filter(status="Menunggu Verifikasi").count()
 
     return render(request, 'riwayat.html', {
         'pelanggan': pelanggan,
