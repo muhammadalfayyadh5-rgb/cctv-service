@@ -52,10 +52,8 @@ def riwayat(request):
 # PESAN
 # =======================
 def pesan(request):
-    print("METHOD =", request.method)
 
     if request.method == "POST":
-        print("POST MASUK")
 
         nama = request.POST.get("nama")
         alamat = request.POST.get("alamat")
@@ -65,16 +63,15 @@ def pesan(request):
         bukti = request.FILES.get("bukti_pembayaran")
 
         Pelanggan.objects.create(
-        user=request.user,
-        nama=nama,
-        alamat=alamat,
-        no_hp=no_hp,
-        paket=paket,
-        status="Menunggu Verifikasi",
-        bukti_pembayaran=bukti
-    )
+            user=request.user if request.user.is_authenticated else None,
+            nama=nama,
+            alamat=alamat,
+            no_hp=no_hp,
+            paket=paket,
+            status="Menunggu Verifikasi",
+            bukti_pembayaran=bukti
+        )
 
-        # Tentukan DP berdasarkan paket
         if paket == "Paket Rumah - 1.500.000":
             dp = "Rp 300.000"
         elif paket == "Paket Toko - 3.000.000":
@@ -85,9 +82,6 @@ def pesan(request):
             dp = "Menyesuaikan Paket"
 
         kode = "CCTV-" + datetime.now().strftime("%H%M%S")
-
-        print("PAKET DARI FORM =", paket)
-        print("DP =", dp)
 
         pesan_wa = f"""
 Halo Admin CCTV
