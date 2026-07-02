@@ -11,5 +11,4 @@ urlpatterns = [
     path('edit/<int:id>/', views.edit_pelanggan, name='edit'),
     path('hapus/<int:id>/', views.konfirmasi_hapus, name='konfirmasi_hapus'),
     path('hapus/<int:id>/delete/', views.hapus_pelanggan, name='hapus_pelanggan'),
-    path("webhook/", views.webhook_fonnte, name="webhook_fonnte"),
 ]
