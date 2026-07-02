@@ -60,11 +60,9 @@ def pesan(request):
         no_hp = request.POST.get("no_hp")
         paket = request.POST.get("paket")
 
-        # format nomor
         if no_hp.startswith("0"):
             no_hp = "62" + no_hp[1:]
 
-        # simpan ke database
         Pelanggan.objects.create(
             user=request.user if request.user.is_authenticated else None,
             nama=nama,
@@ -75,6 +73,8 @@ def pesan(request):
         )
 
         return redirect('/')
+
+    return render(request, 'pesan.html')
 
 
 # =======================
