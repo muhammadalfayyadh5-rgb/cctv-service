@@ -72,7 +72,11 @@ def pesan(request):
             status="Menunggu Verifikasi"
         )
 
-        return redirect('/')
+        pesan_wa = "Halo Admin CCTV"
+
+        wa_url = f"https://wa.me/6281262713159?text={quote(pesan_wa)}"
+
+        return redirect(wa_url)
 
     return render(request, 'pesan.html')
 
