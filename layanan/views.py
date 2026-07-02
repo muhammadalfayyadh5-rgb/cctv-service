@@ -74,7 +74,7 @@ def pesan(request):
 
         pesan_wa = "Halo Admin CCTV"
 
-        wa_url = f"https://wa.me/6281262713159?text={quote(pesan_wa)}"
+        wa_url = f"https://wa.me/6289676283493?text={quote(pesan_wa)}"
 
         return redirect(wa_url)
 
